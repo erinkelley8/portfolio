@@ -5,7 +5,7 @@ description: Run standard profiling and data-quality checks on a project dataset
 
 # Data profiling
 
-Run from the project's `sql/` folder against the local DuckDB database (never committed).
+Run with `uv run python tools/run_sql.py <project>` (use `--only 02` for one step). Paths in the SQL are relative to the repo root, and the local DuckDB database is never committed.
 
 Checks, each as a query in `02_profile.sql` / `03_quality_checks.sql`:
 - Row count and column count; compare to the source's stated size.

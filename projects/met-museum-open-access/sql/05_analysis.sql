@@ -8,14 +8,14 @@ FROM objects_typed
 GROUP BY 1
 ORDER BY objects DESC;
 
--- Collection by century of creation (begin year)
+-- Collection by century of creation (cleaned begin year; out-of-range years grouped as unknown)
 SELECT
     CASE
-        WHEN begin_year IS NULL THEN 'unknown'
-        ELSE ((FLOOR(begin_year / 100.0) * 100)::BIGINT)::VARCHAR
+        WHEN begin_year_clean IS NULL THEN 'unknown'
+        ELSE ((FLOOR(begin_year_clean / 100.0) * 100)::BIGINT)::VARCHAR
     END AS century_start,
     COUNT(*) AS objects
-FROM objects_typed
+FROM objects_clean
 GROUP BY 1
 ORDER BY TRY_CAST(century_start AS INTEGER) NULLS LAST;
 

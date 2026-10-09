@@ -9,7 +9,7 @@ description: Scaffold a new dataset project folder under projects/ from the repo
 2. Copy `docs/templates/project-template/` to `projects/<kebab-name>/`.
 3. Fill `DATA_CARD.md` (source, licence, retrieval method, known limits, privacy check) and `LICENSE_NOTES.md` (attribution and redistribution rules).
 4. Configure `scripts/download.py`: HTTPS only, write `manifest.json` (URL, retrieval date, SHA-256), no execution of downloaded content, no images.
-5. Add numbered SQL files in `sql/` (load, profile, quality checks, analysis).
+5. Add numbered SQL files in `sql/` (load, profile, quality checks, clean, analysis). Cleaning is a non-destructive view; flag or null problem values and document each rule.
 6. Confirm `data/raw/` and `data/processed/` are gitignored and that no data is staged.
 7. Add the project to the table in the root `README.md`.
 8. Run the `data-governance-review` skill before committing.

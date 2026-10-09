@@ -9,9 +9,15 @@
       "Bash(uv run pytest:*)",
       "Bash(duckdb:*)"
     ],
+    "ask": [
+      "Bash(git push:*)",
+      "Bash(uv run python projects/*/scripts/download.py:*)"
+    ],
     "deny": [
       "Read(./.env)",
       "Read(./.env.*)",
+      "Read(./projects/*/data/raw/**)",
+      "Read(./**/*.duckdb)",
       "Bash(git push --force:*)",
       "Bash(git push -f:*)",
       "Bash(git reset --hard:*)",
