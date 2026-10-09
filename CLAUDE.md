@@ -23,7 +23,7 @@ This is a portfolio repo of governed, reproducible data projects. Each dataset l
 - Do not push, force-push, or modify git history without explicit instruction.
 - Do not read or write secrets. Never print credentials.
 - Report results faithfully: if a check fails or a step was skipped, say so.
-- Do not reference private notes in `.local/` from any tracked file.
+- Do not read raw data or `.duckdb` files directly; query them through the project SQL and runner.
 
 ## Skills
 - `new-dataset-project`: scaffold a project from the template

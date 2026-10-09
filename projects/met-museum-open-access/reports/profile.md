@@ -43,3 +43,14 @@ Drawings and Prints (172,630), European Sculpture and Decorative Arts (43,051), 
 - Year fields are free-form in the source and were parsed with `TRY_CAST`; unparseable values become null.
 - "Blank" counts treat empty strings and nulls the same.
 - No personal-data concerns were identified in the fields profiled.
+
+## Cleaning (`sql/04_clean.sql`)
+Non-destructive: the raw table is unchanged and a view `objects_clean` adds cleaned columns and flags.
+
+| Rule | Effect |
+|---|---|
+| Years outside -10,000..2,100 set to NULL in `*_clean` columns | 47 begin years and 15 end years nulled; 49 records flagged `year_out_of_range` |
+| End year before begin year is flagged, not altered | 205 records flagged `year_order_issue` |
+| Post-clean check: out-of-range values remaining | 0 |
+
+Century analysis (`sql/05_analysis.sql`) uses the cleaned begin year; records with an out-of-range year are grouped as "unknown".

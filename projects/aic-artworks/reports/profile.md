@@ -45,3 +45,14 @@ Prints and Drawings (53,816), Photography and Media (24,793), Arts of Asia (17,0
 - Source schema is nested (arrays and structs); the analysis uses a flat typed view of selected fields.
 - Records were streamed from the archive into one JSON Lines file for loading; content is otherwise unchanged.
 - No personal-data concerns were identified in the fields profiled.
+
+## Cleaning (`sql/04_clean.sql`)
+Non-destructive: the raw table is unchanged and a view `artworks_clean` adds cleaned columns and flags.
+
+| Rule | Effect |
+|---|---|
+| Years outside -10,000..2,100 set to NULL in `*_clean` columns | 13 start dates and 6 end dates nulled; 17 records flagged `year_out_of_range` |
+| End date before start date is flagged, not altered | 0 records flagged `year_order_issue` |
+| Post-clean check: out-of-range values remaining | 0 |
+
+Century analysis (`sql/05_analysis.sql`) uses the cleaned start date; records with an out-of-range year are grouped as "unknown".

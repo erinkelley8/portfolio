@@ -17,7 +17,7 @@ uv run python tools/run_sql.py aic-artworks
 | `DATA_CARD.md` | Source, scope, limits, privacy check |
 | `LICENSE_NOTES.md` | Licence and attribution rules |
 | `scripts/download.py` | One-time snapshot download; streams artworks into one JSONL file; writes manifest |
-| `sql/` | Numbered DuckDB SQL: load, profile, quality checks, analysis |
+| `sql/` | Numbered DuckDB SQL: load, profile, quality checks, clean, analysis |
 | `reports/profile.md` | Findings for the current snapshot |
 
 Data lives in `data/raw/` and `data/processed/` and is never committed.

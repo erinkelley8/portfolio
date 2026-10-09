@@ -18,7 +18,7 @@ Each project follows the same steps (replace `<project>`):
 
 ```
 uv run python projects/<project>/scripts/download.py   # one-time snapshot, writes manifest.json
-uv run python tools/run_sql.py <project>               # runs sql/01..04 against a local DuckDB file
+uv run python tools/run_sql.py <project>               # runs sql/01..05 against a local DuckDB file
 ```
 Use `--only 02` to run a single step. Output is printed; the database lives in `projects/<project>/data/processed/` (gitignored).
 
