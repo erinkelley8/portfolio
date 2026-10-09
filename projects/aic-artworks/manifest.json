@@ -1,0 +1,8 @@
+{
+  "source_url": "https://artic-api-data.s3.amazonaws.com/artic-api-data.tar.bz2",
+  "file": "artic-api-data.tar.bz2",
+  "retrieved_utc": "2026-10-09T20:55:17+00:00",
+  "sha256": "8af7838a4de56f70e832798dbb2e1e33e1bd3f721ed773cae4b6fb58a6edd50c",
+  "size_bytes": 130131744,
+  "notes": "AIC api-data dump; 139699 artwork records extracted to artworks.jsonl. Metadata CC0; description CC BY 4.0; images not included."
+}

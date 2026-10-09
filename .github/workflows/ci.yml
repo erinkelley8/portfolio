@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: astral-sh/setup-uv@v5
+
+      - name: Install dependencies
+        run: uv sync
+
+      - name: Lint Python
+        run: uv run ruff check .
+
+      - name: Lint SQL
+        run: uv run sqlfluff lint projects/*/sql
+
+      - name: Tests
+        run: uv run pytest
+
+      - name: Ensure no data, images, or env files are tracked
+        run: |
+          bad=$(git ls-files | grep -E '(^|/)data/(raw|processed)/|\.duckdb$|\.parquet$|\.env($|\.)|\.(jpg|jpeg|png|tif|tiff)$' || true)
+          if [ -n "$bad" ]; then
+            echo "Tracked files that must not be committed:"; echo "$bad"; exit 1
+          fi
+
+      - name: Secret scan
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

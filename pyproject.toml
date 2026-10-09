@@ -1,0 +1,47 @@
+[project]
+name = "portfolio"
+version = "0.1.0"
+description = "Governed, reproducible data projects on open datasets"
+requires-python = ">=3.11"
+dependencies = [
+    "duckdb>=1.0",
+    "pandas>=2.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.5",
+    "sqlfluff>=3.0",
+]
+
+[tool.ruff]
+line-length = 110
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "S"]
+
+[tool.ruff.lint.per-file-ignores]
+"**/test_*.py" = ["S101"]
+"**/tests/*" = ["S101"]
+
+[tool.pytest.ini_options]
+testpaths = ["tools", "projects"]
+
+[tool.sqlfluff.core]
+dialect = "duckdb"
+max_line_length = 120
+# AM04/RF06: SELECT * and quoted source column names (e.g. "Object ID") are intentional.
+# ST06/AM06: keep select order and GROUP BY 1 / ORDER BY readable for analysts.
+# AL03: UNION ALL columns take their names from the first SELECT.
+exclude_rules = ["AM04", "RF06", "ST06", "AM06", "RF04", "AL01", "AL03"]
+
+[tool.sqlfluff.rules.capitalisation.keywords]
+capitalisation_policy = "upper"
+
+[tool.sqlfluff.rules.capitalisation.functions]
+extended_capitalisation_policy = "upper"
+
+[tool.sqlfluff.rules.capitalisation.identifiers]
+extended_capitalisation_policy = "lower"

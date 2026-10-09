@@ -1,0 +1,8 @@
+{
+  "source_url": "https://media.githubusercontent.com/media/metmuseum/openaccess/master/MetObjects.csv",
+  "file": "MetObjects.csv",
+  "retrieved_utc": "2026-10-09T20:34:59+00:00",
+  "sha256": "de617b9c947458e426111207f81a65bd1379a151c0077d3ce29cfc22fc0b9183",
+  "size_bytes": 317650992,
+  "notes": "Met Open Access CSV, CC0. Metadata only; images not included."
+}
