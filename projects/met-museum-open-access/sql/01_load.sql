@@ -1,7 +1,7 @@
 -- Load the Met Open Access snapshot into DuckDB. Run from the repo root.
 CREATE OR REPLACE TABLE objects AS
 SELECT *
-FROM read_csv(
+FROM READ_CSV(
     'projects/met-museum-open-access/data/raw/MetObjects.csv',
     header = true,
     all_varchar = true,

@@ -2,7 +2,7 @@
 -- Field names follow the AIC API artwork schema; confirm against the first load with DESCRIBE.
 CREATE OR REPLACE TABLE artworks AS
 SELECT *
-FROM read_json(
+FROM READ_JSON(
     'projects/aic-artworks/data/raw/artworks/*.json',
     format = 'auto',
     union_by_name = true,

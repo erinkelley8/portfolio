@@ -1,23 +1,28 @@
 -- Public-domain share by department
-SELECT department,
-       COUNT(*) AS artworks,
-       SUM(is_public_domain::INT) AS public_domain,
-       ROUND(100.0 * AVG(is_public_domain::INT), 1) AS public_domain_pct
+SELECT
+    department,
+    COUNT(*) AS artworks,
+    SUM(is_public_domain::INT) AS public_domain,
+    ROUND(100.0 * AVG(is_public_domain::INT), 1) AS public_domain_pct
 FROM artworks_typed
 GROUP BY 1
 ORDER BY artworks DESC;
 
 -- Artworks by century of creation (start year)
 SELECT
-    CASE WHEN date_start IS NULL THEN 'unknown'
-         ELSE CAST(FLOOR(date_start / 100.0) * 100 AS VARCHAR) END AS century_start,
+    CASE
+        WHEN date_start IS NULL THEN 'unknown'
+        ELSE (FLOOR(date_start / 100.0) * 100)::VARCHAR
+    END AS century_start,
     COUNT(*) AS artworks
 FROM artworks_typed
 GROUP BY 1
 ORDER BY TRY_CAST(century_start AS INTEGER) NULLS LAST;
 
 -- Most common artwork types
-SELECT artwork_type, COUNT(*) AS artworks
+SELECT
+    artwork_type,
+    COUNT(*) AS artworks
 FROM artworks_typed
 WHERE artwork_type IS NOT NULL
 GROUP BY 1

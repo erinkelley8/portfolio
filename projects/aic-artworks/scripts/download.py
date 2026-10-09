@@ -69,7 +69,10 @@ def main() -> int:
         file=ARCHIVE,
         sha256=sha256,
         size_bytes=size,
-        notes=f"AIC api-data dump; {count} artwork JSON files extracted. Metadata CC0; description CC BY 4.0; images not included.",
+        notes=(
+            f"AIC api-data dump; {count} artwork JSON files extracted. "
+            "Metadata CC0; description CC BY 4.0; images not included."
+        ),
     )
     print(f"Extracted {count:,} artwork files, archive sha256={sha256}\nManifest: {MANIFEST}")
     return 0

@@ -1,13 +1,17 @@
 SELECT COUNT(*) AS row_count FROM artworks;
-SELECT COUNT(*) AS column_count FROM (DESCRIBE artworks);
+SELECT COUNT(*) AS column_count FROM (describe artworks);
 
-SELECT is_public_domain, COUNT(*) AS n,
-       ROUND(100.0 * COUNT(*) / SUM(COUNT(*)) OVER (), 2) AS pct
+SELECT
+    is_public_domain,
+    COUNT(*) AS n,
+    ROUND(100.0 * COUNT(*) / SUM(COUNT(*)) OVER (), 2) AS pct
 FROM artworks_typed
 GROUP BY 1
 ORDER BY 1;
 
-SELECT department, COUNT(*) AS n
+SELECT
+    department,
+    COUNT(*) AS n
 FROM artworks_typed
 GROUP BY 1
 ORDER BY n DESC;

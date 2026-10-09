@@ -8,7 +8,7 @@ from __future__ import annotations
 
 import hashlib
 import json
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from urllib.parse import urlparse
 from urllib.request import Request, urlopen
@@ -23,7 +23,7 @@ def download(url: str, dest: Path, user_agent: str) -> tuple[str, int]:
     dest.parent.mkdir(parents=True, exist_ok=True)
     digest = hashlib.sha256()
     size = 0
-    request = Request(url, headers={"User-Agent": user_agent})
+    request = Request(url, headers={"User-Agent": user_agent})  # noqa: S310 (https enforced above)
     with urlopen(request, timeout=60) as response, dest.open("wb") as out:  # noqa: S310
         while chunk := response.read(CHUNK):
             out.write(chunk)
@@ -32,12 +32,14 @@ def download(url: str, dest: Path, user_agent: str) -> tuple[str, int]:
     return digest.hexdigest(), size
 
 
-def write_manifest(path: Path, *, source_url: str, file: Path, sha256: str, size_bytes: int, notes: str) -> None:
+def write_manifest(
+    path: Path, *, source_url: str, file: Path, sha256: str, size_bytes: int, notes: str
+) -> None:
     """Record where the snapshot came from, when, and its checksum."""
     manifest = {
         "source_url": source_url,
         "file": file.name,
-        "retrieved_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "retrieved_utc": datetime.now(UTC).isoformat(timespec="seconds"),
         "sha256": sha256,
         "size_bytes": size_bytes,
         "notes": notes,

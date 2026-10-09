@@ -1,16 +1,20 @@
 -- Row and column counts
 SELECT COUNT(*) AS row_count FROM objects;
-SELECT COUNT(*) AS column_count FROM (DESCRIBE objects);
+SELECT COUNT(*) AS column_count FROM (describe objects);
 
 -- Share of records by public-domain flag
-SELECT is_public_domain, COUNT(*) AS n,
-       ROUND(100.0 * COUNT(*) / SUM(COUNT(*)) OVER (), 2) AS pct
+SELECT
+    is_public_domain,
+    COUNT(*) AS n,
+    ROUND(100.0 * COUNT(*) / SUM(COUNT(*)) OVER (), 2) AS pct
 FROM objects_typed
 GROUP BY 1
 ORDER BY 1;
 
 -- Records by department
-SELECT department, COUNT(*) AS n
+SELECT
+    department,
+    COUNT(*) AS n
 FROM objects_typed
 GROUP BY 1
 ORDER BY n DESC;

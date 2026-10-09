@@ -2,7 +2,6 @@ import json
 from pathlib import Path
 
 import pytest
-
 from portfolio_common import download, write_manifest
 
 
