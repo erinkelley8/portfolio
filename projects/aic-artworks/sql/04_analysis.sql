@@ -12,7 +12,7 @@ ORDER BY artworks DESC;
 SELECT
     CASE
         WHEN date_start IS NULL THEN 'unknown'
-        ELSE (FLOOR(date_start / 100.0) * 100)::VARCHAR
+        ELSE ((FLOOR(date_start / 100.0) * 100)::BIGINT)::VARCHAR
     END AS century_start,
     COUNT(*) AS artworks
 FROM artworks_typed

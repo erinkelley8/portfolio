@@ -3,7 +3,7 @@
 Profiling, quality checks, and exploratory analysis of the Metropolitan Museum of Art Open Access dataset (object metadata, CC0).
 
 ## Status
-Scaffolded. Snapshot not yet downloaded. See `manifest.json` once it is.
+Snapshot taken 2026-10-09; see `manifest.json` and `reports/profile.md`.
 
 ## Run
 ```

@@ -35,12 +35,15 @@ def main() -> int:
     con = duckdb.connect(str(db_path))
     for sql_file in sql_files:
         print(f"-- {sql_file.name}")
-        for statement in sql_file.read_text(encoding="utf-8").split(";"):
+        # Drop full-line comments first so a ';' inside a comment cannot split a statement.
+        lines = sql_file.read_text(encoding="utf-8").splitlines()
+        script = "\n".join(line for line in lines if not line.lstrip().startswith("--"))
+        for statement in script.split(";"):
             if not statement.strip():
                 continue
-            result = con.execute(statement)
-            if result.description:  # statement returned rows
-                print(result.fetchdf().to_string(index=False))
+            con.execute(statement)
+            if con.description:  # statement returned rows
+                print(con.fetchdf().to_string(index=False))
     con.close()
     return 0
 

@@ -12,7 +12,7 @@ ORDER BY objects DESC;
 SELECT
     CASE
         WHEN begin_year IS NULL THEN 'unknown'
-        ELSE (FLOOR(begin_year / 100.0) * 100)::VARCHAR
+        ELSE ((FLOOR(begin_year / 100.0) * 100)::BIGINT)::VARCHAR
     END AS century_start,
     COUNT(*) AS objects
 FROM objects_typed
