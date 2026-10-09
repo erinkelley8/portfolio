@@ -3,7 +3,7 @@
 Profiling, quality checks, and exploratory analysis of the Art Institute of Chicago artworks metadata, from the official bulk data dump.
 
 ## Status
-Scaffolded. Snapshot not yet downloaded. See `manifest.json` once it is.
+Snapshot taken 2026-10-09; see `manifest.json` and `reports/profile.md`.
 
 ## Run
 ```
@@ -16,7 +16,7 @@ uv run python tools/run_sql.py aic-artworks
 |---|---|
 | `DATA_CARD.md` | Source, scope, limits, privacy check |
 | `LICENSE_NOTES.md` | Licence and attribution rules |
-| `scripts/download.py` | One-time snapshot download, extracts artworks only, writes manifest |
+| `scripts/download.py` | One-time snapshot download; streams artworks into one JSONL file; writes manifest |
 | `sql/` | Numbered DuckDB SQL: load, profile, quality checks, analysis |
 | `reports/profile.md` | Findings for the current snapshot |
 

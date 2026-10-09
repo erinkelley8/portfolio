@@ -2,11 +2,10 @@
 -- Field names follow the AIC API artwork schema; confirm against the first load with DESCRIBE.
 CREATE OR REPLACE TABLE artworks AS
 SELECT *
-FROM READ_JSON(
-    'projects/aic-artworks/data/raw/artworks/*.json',
-    format = 'auto',
-    union_by_name = true,
-    maximum_object_size = 33554432
+FROM READ_NDJSON(
+    'projects/aic-artworks/data/raw/artworks.jsonl',
+    sample_size = -1,
+    maximum_object_size = 4194304
 );
 
 CREATE OR REPLACE VIEW artworks_typed AS
